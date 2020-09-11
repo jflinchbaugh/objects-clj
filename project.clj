@@ -5,4 +5,5 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [scad-clj "0.5.3"]]
-  :repl-options {:init-ns objects-clj.core})
+  :repl-options {:init-ns objects-clj.core}
+  :main ^:skip-aot objects-clj.core)

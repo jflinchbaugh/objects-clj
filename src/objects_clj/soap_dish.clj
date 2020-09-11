@@ -1,16 +1,13 @@
 (ns objects-clj.soap-dish
   (:refer-clojure :exclude [import use])
-  (:require [scad-clj.model :refer :all]
-            [scad-clj.scad :refer :all]
-            [clojure.string :as str]))
+  (:require [objects-clj.core :refer [as-hole]]
+            [scad-clj.model :refer :all]))
 
 ; 12 mm radius
 ; 55 mm from wall
 ; soap is 100mm x 60mm
 
-(defn as-hole [s] (+ 0.01 s))
-
-(defn build [{:keys [radius width dish-width dish-length thickness]}]
+(defn soap-dish [{:keys [radius width dish-width dish-length thickness]}]
   (fn! 48)
   (difference
    (union
@@ -54,9 +51,6 @@
         cut1]
        (cube (as-hole (* 2 thickness)) (/ dish-width 3) (* 2 thickness)))))))
 
-(spit
- "soap-dish.scad"
- (write-scad
-  (build {:radius 12 :width 55 :dish-width 60 :dish-length 100 :thickness 2})))
-
-(comment)
+(defn builds []
+  {:soap-dish (partial soap-dish {:radius 12 :width 55 :dish-width 60 :dish-length 100 :thickness 2})}
+  )
